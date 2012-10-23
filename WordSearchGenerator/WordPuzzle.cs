@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace WordSearchGenerator
 {
     class WordPuzzle
     {
         private int totalListChars;
-        private int puzzleSize;
         private int sugSize;
         public WordGrid puzzleGrid;
+        public Dictionary<string, Point> wordLocs;
 
         private enum orientation
         {
@@ -65,6 +66,7 @@ namespace WordSearchGenerator
          */
         private void FillWords(List<string> listOfWords, WordGrid grid)
         {
+            wordLocs = new Dictionary<string, Point>();
             Random random = new Random();
             int puzzleHeight = grid.Height;
             int puzzleWidth = grid.Width;
@@ -94,6 +96,7 @@ namespace WordSearchGenerator
                                 int maxStartCol = puzzleWidth - word.Length;
                                 startingRow = random.Next(puzzleHeight);
                                 startingCol = random.Next(maxStartCol);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
@@ -111,6 +114,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }
@@ -126,6 +130,7 @@ namespace WordSearchGenerator
                                 int maxStartRow = puzzleHeight - word.Length;
                                 startingRow = random.Next(maxStartRow);
                                 startingCol = random.Next(puzzleWidth);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentRow = startingRow;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
@@ -143,6 +148,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }
@@ -158,6 +164,7 @@ namespace WordSearchGenerator
                                 int minStartCol = wordChars.Length; //We're going backwards, so we don't want to start too close the left edge
                                 startingRow = random.Next(puzzleHeight);
                                 startingCol = random.Next(minStartCol, puzzleWidth);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
@@ -175,6 +182,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }
@@ -190,6 +198,7 @@ namespace WordSearchGenerator
                                 int minStartRow = wordChars.Length;
                                 startingRow = random.Next(minStartRow, puzzleHeight);
                                 startingCol = random.Next(puzzleWidth);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentRow = startingRow;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
@@ -208,6 +217,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }
@@ -224,6 +234,7 @@ namespace WordSearchGenerator
                                 int maxStartCol = puzzleWidth - wordChars.Length;
                                 startingRow = random.Next(minStartRow, puzzleHeight);
                                 startingCol = random.Next(0, maxStartCol);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentRow = startingRow;
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
@@ -243,6 +254,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }
@@ -259,6 +271,7 @@ namespace WordSearchGenerator
                                 int minStartCol = wordChars.Length;
                                 startingRow = random.Next(0, maxStartRow);
                                 startingCol = random.Next(minStartCol, puzzleWidth);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentRow = startingRow;
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
@@ -278,6 +291,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }
@@ -294,6 +308,7 @@ namespace WordSearchGenerator
                                 int maxStartCol = puzzleWidth - wordChars.Length;
                                 startingRow = random.Next(0, maxStartRow);
                                 startingCol = random.Next(0, maxStartCol);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentRow = startingRow;
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
@@ -313,6 +328,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }
@@ -329,6 +345,7 @@ namespace WordSearchGenerator
                                 int minStartCol = wordChars.Length;
                                 startingRow = random.Next(minStartRow, puzzleWidth);
                                 startingCol = random.Next(minStartCol, puzzleHeight);
+                                Point startPoint = new Point(startingRow, startingCol);
                                 int currentRow = startingRow;
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
@@ -348,6 +365,7 @@ namespace WordSearchGenerator
                                 if (okay)
                                 {
                                     grid.puzzle = CopyJaggedArray(testGrid);
+                                    wordLocs.Add(word, startPoint);
                                 }
                             }
                         }

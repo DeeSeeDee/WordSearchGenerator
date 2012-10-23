@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.totalWords = new System.Windows.Forms.TextBox();
@@ -78,7 +79,6 @@
             this.wordList.ColumnWidth = 100;
             this.wordList.FormattingEnabled = true;
             this.wordList.Location = new System.Drawing.Point(12, 117);
-            this.wordList.MultiColumn = true;
             this.wordList.Name = "wordList";
             this.wordList.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.wordList.Size = new System.Drawing.Size(166, 199);
@@ -138,9 +138,11 @@
             this.Controls.Add(this.totalWords);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Enter Words";
             this.ResumeLayout(false);
             this.PerformLayout();

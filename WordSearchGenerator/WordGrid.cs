@@ -11,7 +11,6 @@ namespace WordSearchGenerator
         //WordGrid holds the characters of the puzzle and their locations in a jagged array.
         private int width;
         private int height;
-        private int gridSize;
         public Char[][] puzzle;
 
         public int Width

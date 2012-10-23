@@ -31,6 +31,11 @@ namespace WordSearchGenerator
                 MessageBox.Show("The word you typed should have three or more characters.", "Word is too short");
                 return false;
             }
+            if (wordToValidate.Length > 15)
+            {
+                MessageBox.Show("The word you typed should have no more than 15 characters.", "Word is too long");
+                return false;
+            }
             if (!Regex.IsMatch(wordToValidate, "^[A-Z]{3,}$"))
             {
                 MessageBox.Show("The word you typed should have only letters. No numbers, symbols, or spaces.", "Words only");
@@ -39,6 +44,11 @@ namespace WordSearchGenerator
             if (wordList.Items.Contains(wordToValidate))
             {
                 MessageBox.Show("The word you have entered already exists in the list of words.", "Duplicate word");
+                return false;
+            }
+            if (wordList.Items.Count > 40)
+            {
+                MessageBox.Show("The maximum number of words is 40.", "Max Words Reached");
                 return false;
             }
             return true;
@@ -88,6 +98,8 @@ namespace WordSearchGenerator
             totalWords.Text = wordCount.ToString();
             if (wordCount > 0)
                 doneButton.Enabled = true;
+            if (wordCount == 40)
+                statusLabel.Text = "Word limit reached";
         }
 
         private void doneButton_Click(object sender, EventArgs e)
