@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsApplication1
+namespace WordSearchGenerator
 {
-    class Letter
+    struct Letter
     {
-        private int xCoord;
-        private int yCoord;
-        private char character;
+        public char PuzzleChar;
+        public bool IsPartOfWord;
+
+        public Letter(char puzzleChar, bool isPartOfWord)
+        {
+            this.PuzzleChar = puzzleChar;
+            this.IsPartOfWord = isPartOfWord;
+        }
     }
 }

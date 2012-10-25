@@ -38,12 +38,14 @@
             this.doneButton = new System.Windows.Forms.Button();
             this.statusLabel = new System.Windows.Forms.Label();
             this.removeBtn = new System.Windows.Forms.Button();
+            this.puzzleTitle = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 34);
+            this.label1.Location = new System.Drawing.Point(12, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(166, 13);
             this.label1.TabIndex = 1;
@@ -52,7 +54,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(10, 89);
+            this.label2.Location = new System.Drawing.Point(10, 118);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 13);
             this.label2.TabIndex = 2;
@@ -60,7 +62,7 @@
             // 
             // totalWords
             // 
-            this.totalWords.Location = new System.Drawing.Point(80, 86);
+            this.totalWords.Location = new System.Drawing.Point(80, 115);
             this.totalWords.Name = "totalWords";
             this.totalWords.ReadOnly = true;
             this.totalWords.Size = new System.Drawing.Size(31, 20);
@@ -68,17 +70,17 @@
             // 
             // wordInput
             // 
-            this.wordInput.Location = new System.Drawing.Point(15, 58);
+            this.wordInput.Location = new System.Drawing.Point(15, 87);
             this.wordInput.Name = "wordInput";
             this.wordInput.Size = new System.Drawing.Size(163, 20);
-            this.wordInput.TabIndex = 1;
+            this.wordInput.TabIndex = 2;
             this.wordInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.wordInput_KeyPress);
             // 
             // wordList
             // 
             this.wordList.ColumnWidth = 100;
             this.wordList.FormattingEnabled = true;
-            this.wordList.Location = new System.Drawing.Point(12, 117);
+            this.wordList.Location = new System.Drawing.Point(12, 146);
             this.wordList.Name = "wordList";
             this.wordList.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.wordList.Size = new System.Drawing.Size(166, 199);
@@ -86,7 +88,7 @@
             // 
             // addButton
             // 
-            this.addButton.Location = new System.Drawing.Point(117, 84);
+            this.addButton.Location = new System.Drawing.Point(117, 113);
             this.addButton.Name = "addButton";
             this.addButton.Size = new System.Drawing.Size(61, 23);
             this.addButton.TabIndex = 6;
@@ -96,7 +98,7 @@
             // 
             // doneButton
             // 
-            this.doneButton.Location = new System.Drawing.Point(103, 322);
+            this.doneButton.Location = new System.Drawing.Point(103, 351);
             this.doneButton.Name = "doneButton";
             this.doneButton.Size = new System.Drawing.Size(75, 23);
             this.doneButton.TabIndex = 7;
@@ -106,17 +108,17 @@
             // 
             // statusLabel
             // 
-            this.statusLabel.AutoSize = true;
             this.statusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusLabel.ForeColor = System.Drawing.Color.Red;
-            this.statusLabel.Location = new System.Drawing.Point(19, 11);
+            this.statusLabel.Location = new System.Drawing.Point(15, 10);
             this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(0, 13);
+            this.statusLabel.Size = new System.Drawing.Size(163, 16);
             this.statusLabel.TabIndex = 8;
+            this.statusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // removeBtn
             // 
-            this.removeBtn.Location = new System.Drawing.Point(12, 322);
+            this.removeBtn.Location = new System.Drawing.Point(12, 351);
             this.removeBtn.Name = "removeBtn";
             this.removeBtn.Size = new System.Drawing.Size(75, 23);
             this.removeBtn.TabIndex = 9;
@@ -124,11 +126,30 @@
             this.removeBtn.UseVisualStyleBackColor = true;
             this.removeBtn.Click += new System.EventHandler(this.removeBtn_Click);
             // 
+            // puzzleTitle
+            // 
+            this.puzzleTitle.Location = new System.Drawing.Point(41, 38);
+            this.puzzleTitle.Name = "puzzleTitle";
+            this.puzzleTitle.Size = new System.Drawing.Size(137, 20);
+            this.puzzleTitle.TabIndex = 1;
+            this.puzzleTitle.TextChanged += new System.EventHandler(this.puzzleTitle_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Title:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(195, 353);
+            this.ClientSize = new System.Drawing.Size(195, 382);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.puzzleTitle);
             this.Controls.Add(this.removeBtn);
             this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.doneButton);
@@ -160,6 +181,8 @@
         private System.Windows.Forms.Button doneButton;
         private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Button removeBtn;
+        private System.Windows.Forms.TextBox puzzleTitle;
+        private System.Windows.Forms.Label label3;
     }
 }
 

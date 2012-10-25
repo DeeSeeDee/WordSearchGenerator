@@ -8,10 +8,10 @@ namespace WordSearchGenerator
 {
     class WordGrid
     {
-        //WordGrid holds the characters of the puzzle and their locations in a jagged array.
+        //WordGrid holds the characters of the puzzle and their locations in a two-dimensional array.
         private int width;
         private int height;
-        public Char[][] puzzle;
+        public Letter[,] puzzle;
 
         public int Width
         {
@@ -26,11 +26,7 @@ namespace WordSearchGenerator
         {
             this.width = width;
             this.height = height;
-            this.puzzle = new Char[height][];
-            for (int i = 0; i < height; i++)
-            {
-                this.puzzle[i] = new Char[width];
-            }
+            this.puzzle = new Letter[height, width];
         }
 
     }

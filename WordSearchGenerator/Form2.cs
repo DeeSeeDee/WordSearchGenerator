@@ -24,13 +24,18 @@ namespace WordSearchGenerator
         }
 
         //Add a visible letter to the form at the specified position
-        private TransparentLabel AddLetter(char labelChar, int x, int y)
+        private TransparentLabel AddLetter(Letter labelLetter, int x, int y)
         {
+            char labelChar = labelLetter.PuzzleChar;
             TransparentLabel newLabel = new TransparentLabel();
             newLabel.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
             newLabel.Text = new string(labelChar, 1);
             newLabel.Location = new Point(x, y);
             newLabel.TextAlign = ContentAlignment.MiddleCenter;
+            if (labelLetter.IsPartOfWord == true)
+            {
+                newLabel.ForeColor = System.Drawing.Color.Red;
+            }
             return newLabel;
         }
 
@@ -52,10 +57,13 @@ namespace WordSearchGenerator
             {
                 for (int j = 0; j < gridToParse.Width; j++)
                 {
-                    char charAtGridLoc = gridToParse.puzzle[i][j];
+                    Letter letterAtGridLoc = gridToParse.puzzle[i,j];
+                    char charAtGridLoc = letterAtGridLoc.PuzzleChar;
+                    bool isLetterInWord = letterAtGridLoc.IsPartOfWord;
                     int charXLoc = j * 20;
                     int charYloc = i * 20;
-                    TransparentLabel letterToAdd = AddLetter(charAtGridLoc, charXLoc, charYloc);
+                    Letter addThisLetter = new Letter(charAtGridLoc, isLetterInWord);
+                    TransparentLabel letterToAdd = AddLetter(letterAtGridLoc, charXLoc, charYloc);
                     this.Controls.Add(letterToAdd);
                 }
             }

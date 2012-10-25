@@ -19,7 +19,7 @@ namespace WordSearchGenerator
             InitializeComponent();
             wordList.Items.Clear();
             totalWords.Text = wordList.Items.Count.ToString();
-            statusLabel.Text = "";
+            statusLabel.Text = "Please Enter a Title";
             doneButton.Enabled = false;
         }
 
@@ -96,8 +96,10 @@ namespace WordSearchGenerator
         {
             int wordCount = wordList.Items.Count;
             totalWords.Text = wordCount.ToString();
-            if (wordCount > 0)
+            if (wordCount > 0 && puzzleTitle.Text.Length > 0)
                 doneButton.Enabled = true;
+            else
+                doneButton.Enabled = false;
             if (wordCount == 40)
                 statusLabel.Text = "Word limit reached";
         }
@@ -111,6 +113,21 @@ namespace WordSearchGenerator
             this.Hide();
             Form2 form2 = new Form2(listOfWords);
             form2.Show();
+        }
+
+        private void puzzleTitle_TextChanged(object sender, EventArgs e)
+        {
+            if (puzzleTitle.Text.Length > 0)
+            {
+                statusLabel.Text = "";
+                if (wordList.Items.Count > 0)
+                    doneButton.Enabled = true;
+            }
+            else
+            {
+                statusLabel.Text = "Please Enter a Title";
+                doneButton.Enabled = false;
+            }
         }
     }
 }

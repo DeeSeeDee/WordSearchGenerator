@@ -91,7 +91,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int maxStartCol = puzzleWidth - word.Length;
                                 startingRow = random.Next(puzzleHeight);
@@ -100,20 +100,20 @@ namespace WordSearchGenerator
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[startingRow][currentCol] != '\0' && testGrid[startingRow][currentCol] != wordChars[i])
+                                    if (testGrid[startingRow,currentCol].PuzzleChar != '\0' && testGrid[startingRow,currentCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
                                     }
                                     else
                                     {
-                                        testGrid[startingRow][currentCol] = wordChars[i];
+                                        testGrid[startingRow, currentCol] = new Letter(wordChars[i], true);
                                         currentCol++;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -125,7 +125,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int maxStartRow = puzzleHeight - word.Length;
                                 startingRow = random.Next(maxStartRow);
@@ -134,20 +134,20 @@ namespace WordSearchGenerator
                                 int currentRow = startingRow;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[currentRow][startingCol] != '\0' && testGrid[currentRow][startingCol] != wordChars[i])
+                                    if (testGrid[currentRow, startingCol].PuzzleChar != '\0' && testGrid[currentRow, startingCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
                                     }
                                     else
                                     {
-                                        testGrid[currentRow][startingCol] = wordChars[i];
+                                        testGrid[currentRow, startingCol] = new Letter(wordChars[i], true);
                                         currentRow++;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -159,7 +159,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int minStartCol = wordChars.Length; //We're going backwards, so we don't want to start too close the left edge
                                 startingRow = random.Next(puzzleHeight);
@@ -168,20 +168,20 @@ namespace WordSearchGenerator
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[startingRow][currentCol] != '\0' && testGrid[startingRow][currentCol] != wordChars[i])
+                                    if (testGrid[startingRow, currentCol].PuzzleChar != '\0' && testGrid[startingRow, currentCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
                                     }
                                     else
                                     {
-                                        testGrid[startingRow][currentCol] = wordChars[i];
+                                        testGrid[startingRow, currentCol] = new Letter(wordChars[i], true);
                                         currentCol--;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -193,7 +193,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int minStartRow = wordChars.Length;
                                 startingRow = random.Next(minStartRow, puzzleHeight);
@@ -202,7 +202,7 @@ namespace WordSearchGenerator
                                 int currentRow = startingRow;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[currentRow][startingCol] != '\0' && testGrid[currentRow][startingCol] != wordChars[i])
+                                    if (testGrid[currentRow, startingCol].PuzzleChar != '\0' && testGrid[currentRow, startingCol].PuzzleChar != wordChars[i])
                                     {
                                         //There's a conflict here. Defer to the existing state and start this word over with a new random location
                                         okay = false;
@@ -210,13 +210,13 @@ namespace WordSearchGenerator
                                     }
                                     else
                                     {
-                                        testGrid[currentRow][startingCol] = wordChars[i];
+                                        testGrid[currentRow, startingCol] = new Letter(wordChars[i], true);
                                         currentRow--;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -228,7 +228,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int minStartRow = wordChars.Length;
                                 int maxStartCol = puzzleWidth - wordChars.Length;
@@ -239,21 +239,21 @@ namespace WordSearchGenerator
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[currentRow][currentCol] != '\0' && testGrid[currentRow][currentCol] != wordChars[i])
+                                    if (testGrid[currentRow, currentCol].PuzzleChar != '\0' && testGrid[currentRow, currentCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
                                     }
                                     else
                                     {
-                                        testGrid[currentRow][currentCol] = wordChars[i];
+                                        testGrid[currentRow, currentCol] = new Letter(wordChars[i], true);
                                         currentRow--;
                                         currentCol++;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -265,7 +265,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int maxStartRow = puzzleHeight - wordChars.Length;
                                 int minStartCol = wordChars.Length;
@@ -276,21 +276,21 @@ namespace WordSearchGenerator
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[currentRow][currentCol] != '\0' && testGrid[currentRow][currentCol] != wordChars[i])
+                                    if (testGrid[currentRow, currentCol].PuzzleChar != '\0' && testGrid[currentRow, currentCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
                                     }
                                     else
                                     {
-                                        testGrid[currentRow][currentCol] = wordChars[i];
+                                        testGrid[currentRow, currentCol] = new Letter(wordChars[i], true);
                                         currentRow++;
                                         currentCol--;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -302,7 +302,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int maxStartRow = puzzleHeight - wordChars.Length;
                                 int maxStartCol = puzzleWidth - wordChars.Length;
@@ -313,21 +313,21 @@ namespace WordSearchGenerator
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[currentRow][currentCol] != '\0' && testGrid[currentRow][currentCol] != wordChars[i])
+                                    if (testGrid[currentRow, currentCol].PuzzleChar != '\0' && testGrid[currentRow, currentCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
                                     }
                                     else
                                     {
-                                        testGrid[currentRow][currentCol] = wordChars[i];
+                                        testGrid[currentRow, currentCol] = new Letter(wordChars[i], true);
                                         currentRow++;
                                         currentCol++;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -339,7 +339,7 @@ namespace WordSearchGenerator
                             bool okay = false;
                             while (!okay)
                             {
-                                char[][] testGrid = CopyJaggedArray(grid.puzzle);
+                                Letter[,] testGrid = CopyArray(grid.puzzle);
                                 okay = true;
                                 int minStartRow = wordChars.Length;
                                 int minStartCol = wordChars.Length;
@@ -350,21 +350,21 @@ namespace WordSearchGenerator
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[currentRow][currentCol] != '\0' && testGrid[currentRow][currentCol] != wordChars[i])
+                                    if (testGrid[currentRow, currentCol].PuzzleChar != '\0' && testGrid[currentRow, currentCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
                                     }
                                     else
                                     {
-                                        testGrid[currentRow][currentCol] = wordChars[i];
+                                        testGrid[currentRow, currentCol] = new Letter(wordChars[i], true);
                                         currentRow--;
                                         currentCol--;
                                     }
                                 }
                                 if (okay)
                                 {
-                                    grid.puzzle = CopyJaggedArray(testGrid);
+                                    grid.puzzle = CopyArray(testGrid);
                                     wordLocs.Add(word, startPoint);
                                 }
                             }
@@ -388,18 +388,22 @@ namespace WordSearchGenerator
             {
                 for (int j = 0; j < gridWidth; j++)
                 {
-                    if (grid.puzzle[i][j] == '\0')
+                    if (grid.puzzle[i,j].PuzzleChar == '\0')
                     {
                         int letterToAdd = random.Next(65, 91);
-                        grid.puzzle[i][j] = (char)letterToAdd;
+                        grid.puzzle[i,j].PuzzleChar = (char)letterToAdd;
                     }
                 }
             }
         }
 
-        private char[][] CopyJaggedArray(char[][] sourceArray)
+        private Letter[,] CopyArray(Letter[,] sourceArray)
         {
-            return sourceArray.Select(s => s.ToArray()).ToArray();
+            int height = sourceArray.GetLength(0);
+            int width = sourceArray.GetLength(1);
+            Letter[,] copyOfArray = new Letter[height,width];
+            Array.Copy(sourceArray, copyOfArray, height * width);
+            return copyOfArray;
         }
 
 
