@@ -133,6 +133,7 @@
             this.puzzleTitle.Size = new System.Drawing.Size(137, 20);
             this.puzzleTitle.TabIndex = 1;
             this.puzzleTitle.TextChanged += new System.EventHandler(this.puzzleTitle_TextChanged);
+            this.puzzleTitle.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.puzzleTitle_KeyPress);
             // 
             // label3
             // 

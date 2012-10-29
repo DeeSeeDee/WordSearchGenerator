@@ -13,6 +13,7 @@ namespace WordSearchGenerator
     public partial class Form1 : Form
     {
         public List<string> listOfWords = new List<string>();
+        private bool debug = true;
 
         public Form1()
         {
@@ -21,6 +22,17 @@ namespace WordSearchGenerator
             totalWords.Text = wordList.Items.Count.ToString();
             statusLabel.Text = "Please Enter a Title";
             doneButton.Enabled = false;
+            if (debug)
+            {
+                puzzleTitle.Text = "Football";
+                string[] wordsToAdd = new string[] { "CHEERLEADER", "QUARTERBACK", "PENALTY", "HALFBACK", "FULLBACK", "LINEBACKER", "RECEIVER", "REFEREE", "TOUCHDOWN", "FIELDGOAL", "KICKER", "PUNTER", "WILDFANS", "HALFTIME", "CONCESSIONS", "COACH", "SAFETY", "TIGHTEND", "TACKLE", "GUARD", "CENTER", "PIGSKIN", "FIRSTDOWN", "KICKOFF", "HELMET", "SHOULDERPADS" };
+                foreach (string word in wordsToAdd)
+                {
+                    wordList.Items.Add(word);
+                }
+                UpdateWordCount();
+                doneButton.Enabled = true;
+            }
         }
 
         private bool ValidateWord(string word, out string wordToValidate)
@@ -111,7 +123,7 @@ namespace WordSearchGenerator
                 listOfWords.Add(item);
             }
             this.Hide();
-            Form2 form2 = new Form2(listOfWords);
+            Form2 form2 = new Form2(listOfWords, puzzleTitle.Text);
             form2.Show();
         }
 
@@ -129,5 +141,13 @@ namespace WordSearchGenerator
                 doneButton.Enabled = false;
             }
         }
+
+        private void puzzleTitle_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                wordInput.Focus();
+        }
+
+
     }
 }
