@@ -9,32 +9,42 @@ namespace WordSearchGenerator
 {
     class WordPuzzle
     {
-        private int totalListChars;
-        private int sugSize;
         public WordGrid puzzleGrid;
         public Dictionary<string, Point> wordLocs;
-
         private enum orientation
         {
             HorFor,
             VertFor,
+            SlashFor,
+            BackslashFor,
             HorRev,
             VertRev,
-            SlashFor,
             SlashRev,
-            BackslashFor,
             BackslashRev
         };
 
-        //When a wordpuzzle is instantiated, it suggests a size for the grid based on the list of words being passed to it
-        //The user can specify a different number on Form2
-        public WordPuzzle(List<string> wordList)
+        public WordPuzzle(List<string> wordList, int height, int width, int difficultyIndex)
         {
-            totalListChars = calculateTotalListChars(wordList);
-            Console.WriteLine("There is a total of " + totalListChars + " letters in the word list.");
-            sugSize = 25;
-            puzzleGrid = CreateGrid(sugSize, sugSize);
-            FillWords(wordList, puzzleGrid);
+            //totalListChars = calculateTotalListChars(wordList);
+            //Console.WriteLine("There is a total of " + totalListChars + " letters in the word list.");
+            int difficulty;
+            switch(difficultyIndex)
+            {
+                case 0:
+                    difficulty = 2;
+                    break;
+                case 1:
+                    difficulty = 4;
+                    break;
+                case 2:
+                    difficulty = 8;
+                    break;
+                default:
+                    difficulty = 8;
+                    break;
+            }                    
+            puzzleGrid = CreateGrid(height, width);
+            FillWords(wordList, puzzleGrid, difficulty);
             FillLetters(puzzleGrid); //Comment this line out for easy troubleshooting of the FillWords function
         }
 
@@ -64,7 +74,7 @@ namespace WordSearchGenerator
         /*FillWords takes the list of words created in Form1, randomly chooses an orientation for each word,
          * and then inserts each word into the puzzle. 
          */
-        private void FillWords(List<string> listOfWords, WordGrid grid)
+        private void FillWords(List<string> listOfWords, WordGrid grid, int difficulty)
         {
             wordLocs = new Dictionary<string, Point>();
             Random random = new Random();
@@ -76,7 +86,7 @@ namespace WordSearchGenerator
             {
                 int startingRow;
                 int startingCol;
-                orientation randomOrientation = (orientation)orientations.GetValue(random.Next(orientations.Length));
+                orientation randomOrientation = (orientation)orientations.GetValue(random.Next(difficulty));
                 char[] wordChars = word.ToCharArray();
 
                 /* In the following switch loop, we establish an orientation for the word. It can be one of eight possible
@@ -100,7 +110,7 @@ namespace WordSearchGenerator
                                 int currentCol = startingCol;
                                 for (int i = 0; i < wordChars.Length; i++)
                                 {
-                                    if (testGrid[startingRow,currentCol].PuzzleChar != '\0' && testGrid[startingRow,currentCol].PuzzleChar != wordChars[i])
+                                    if (testGrid[startingRow, currentCol].PuzzleChar != '\0' && testGrid[startingRow, currentCol].PuzzleChar != wordChars[i])
                                     {
                                         okay = false;
                                         break;
@@ -388,10 +398,10 @@ namespace WordSearchGenerator
             {
                 for (int j = 0; j < gridWidth; j++)
                 {
-                    if (grid.puzzle[i,j].PuzzleChar == '\0')
+                    if (grid.puzzle[i, j].PuzzleChar == '\0')
                     {
                         int letterToAdd = random.Next(65, 91);
-                        grid.puzzle[i,j].PuzzleChar = (char)letterToAdd;
+                        grid.puzzle[i, j].PuzzleChar = (char)letterToAdd;
                     }
                 }
             }
@@ -401,13 +411,9 @@ namespace WordSearchGenerator
         {
             int height = sourceArray.GetLength(0);
             int width = sourceArray.GetLength(1);
-            Letter[,] copyOfArray = new Letter[height,width];
+            Letter[,] copyOfArray = new Letter[height, width];
             Array.Copy(sourceArray, copyOfArray, height * width);
             return copyOfArray;
         }
-
-
-
-
     }
 }

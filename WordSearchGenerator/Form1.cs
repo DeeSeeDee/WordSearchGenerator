@@ -12,8 +12,8 @@ namespace WordSearchGenerator
 {
     public partial class Form1 : Form
     {
-        public List<string> listOfWords = new List<string>();
-        private bool debug = true;
+        public List<string> listOfWords = new List<string>(); //This will hold the list of words to be incorporated into the puzzle
+        private bool debug = true; //Debug mode simply prepopulates the word list and title for quick puzzle creation
 
         public Form1()
         {
@@ -33,8 +33,15 @@ namespace WordSearchGenerator
                 UpdateWordCount();
                 doneButton.Enabled = true;
             }
+            //Make "Normal" the default difficulty level for the puzzle
+            if (diffBox.SelectedIndex < 0 || diffBox.SelectedIndex > 2)
+            {
+                diffBox.SelectedIndex = 2;
+            }
+
         }
 
+        //Words must be between 3 and 15 characters, consist only of English letters. No duplicates allowed. Max 40 words in the puzzle.
         private bool ValidateWord(string word, out string wordToValidate)
         {
             wordToValidate = word.ToUpper();
@@ -122,8 +129,11 @@ namespace WordSearchGenerator
             {
                 listOfWords.Add(item);
             }
+            int difficultyIndex = this.diffBox.SelectedIndex;
+            int puzzleHeight = (int)this.heightSelect.Value;
+            int puzzleWidth = (int)this.widthSelect.Value;
             this.Hide();
-            Form2 form2 = new Form2(listOfWords, puzzleTitle.Text);
+            Form2 form2 = new Form2(listOfWords, puzzleTitle.Text, difficultyIndex, puzzleWidth, puzzleHeight, this);
             form2.Show();
         }
 
@@ -146,6 +156,23 @@ namespace WordSearchGenerator
         {
             if (e.KeyChar == 13)
                 wordInput.Focus();
+        }
+
+        //Constrain the height and width values between 20 and 40
+        private void heightSelect_ValueChanged(object sender, EventArgs e)
+        {
+            if (heightSelect.Value > 40)
+                heightSelect.Value = 40;
+            if (heightSelect.Value < 20)
+                heightSelect.Value = 20;
+        }
+
+        private void widthSelect_ValueChanged(object sender, EventArgs e)
+        {
+            if (widthSelect.Value > 40)
+                widthSelect.Value = 40;
+            if (widthSelect.Value < 20)
+                widthSelect.Value = 20;
         }
 
 
